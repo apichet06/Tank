@@ -17,7 +17,7 @@ insert = Request.Form("insert")
 
 if insert = "insert" Then 
 
-        sql = "SELECT COUNT(*) AS DuplicateCount FROM [TankDB].[dbo].[Tank] WHERE  T_Name = '"& T_Name &"' and T_Status = '1' "
+        sql = "SELECT COUNT(*) AS DuplicateCount FROM [TankDB].[dbo].[Tank] WHERE  T_Name = '"& T_Name &"' and M_ID='"& M_ID &"' and T_Status = '1' "
 
         Dim rs
         Set rs = db.Execute(sql)
