@@ -44,6 +44,9 @@ If username ="" Then
             <div class="col-md-12 text-center">
                   <h4>ประวัติการเปลี่ยน CS Part</h4> <hr/>
             </div>
+             <div class="col-md-12 text-center">
+                  <h4> <a href="./default.asp?T_ID=<%=T_ID%>"><i class="fa-solid fa-house-chimney"></i></a></h4> <hr/>
+            </div>
             <div class="col-md-12 ">
                                     <div class="row justify-content-center">
                                         

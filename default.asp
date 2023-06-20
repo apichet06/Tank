@@ -54,8 +54,8 @@ If username ="" Then
                                                         " INNER JOIN [TankDB].[dbo].[Tank] b ON b.M_ID = a.M_ID " &_
                                                         " LEFT JOIN [TankDB].[dbo].[CsCode] c ON c.CS_ID = b.CS_ID " &_
                                                         " LEFT JOIN [TankDB].[dbo].[Tank_Dates] d ON d.T_ID = b.T_ID " &_
-                                                        " WHERE b.T_Status = 1 " &_
-                                                        " GROUP BY b.T_Name " &_
+                                                        " WHERE b.T_Status = 1 and a.M_Status = 1" &_
+                                                        " GROUP BY b.T_ID " &_
                                                         " ORDER BY MAX(d.TK_Id) DESC "
                                                         SET rs = db.Execute(sql)
                                                             While Not rs.EOF

@@ -58,7 +58,7 @@ If username ="" Then
                                                         IF Not rs.EOF Then
                                                         %>
                                                         <input class="form-control select2" id="T_ID" name="T_ID" value="<%=rs("T_ID")%>" hidden> 
-                                                        <input class="form-control select2"value="<%=rs("T_Name")%>" disabled>  
+                                                        <input class="form-control select2"value="<%=rs("M_Name")&" | "&rs("T_Name")%>" disabled>  
                                                         <%
                                                      End IF
                                                         %>

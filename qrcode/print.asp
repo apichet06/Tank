@@ -16,7 +16,7 @@ If username ="" Then
     <title>HANGER REPAIR</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"> 
     <link rel="stylesheet" href="../css/tempusdominus-bootstrap-4.min.css"/>
- 
+   <!-- <link rel="stylesheet" type="text/css" href="../font/stylesheet.css"> -->
      <script src="../js/qrcode.min.js"></script>
   </head>
   <body> 

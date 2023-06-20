@@ -91,9 +91,10 @@ body {
         <div class="dropdown-menu">
            <% If part_file ="/Tank/" or part_file ="/tank/" Then %>
           <a class="dropdown-item" href="./Machine/">ข้อมูล Machine</a>
+          <a class="dropdown-item" href="./Code_CS/">Code CS</a>
           <a class="dropdown-item" href="./Turning_point">จุดที่เปลี่ยน</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="./Code_CS/">Code CS</a>
+         
           <a class="dropdown-item" href="./qrcode/default.asp">Print Qrcode</a>
             <% Else %>
                 <a class="dropdown-item" href="../Machine/">ข้อมูล Machine</a> 

@@ -49,7 +49,7 @@ If username ="" Then
                                 <div class="card-body">
                                 <h4> คลิกเลือกรายการที่ต้องการ Print</h4> <hr/>
                                     <div class="row">
-                                    <%
+                                    <% i=1
                                     sql = "SELECT MAX(a.M_Name) AS M_Name, MAX(c.T_Name) AS T_Name, MAX(c.T_Change) AS T_Change, MAX(c.T_Period) AS T_Period, MAX(T_QTY) AS T_QTY, c.T_ID" &_
                                         " FROM [TankDB].[dbo].[Machine] a" &_ 
                                         " INNER JOIN [TankDB].[dbo].[Tank] c ON a.M_ID = c.M_ID" &_ 
@@ -68,7 +68,7 @@ If username ="" Then
                                             <div class="card">
                                                 <div class="card-body">
                                                     <a href="#" class="insert_data" data-t_id="<%=T_ID%>">
-                                                    <%=M_Name %><br> 
+                                                    <%="#"& i &" "& M_Name %><br> 
                                                     จุดที่เปลี่ยน : <%=T_Name %><br>
                                                     รอบเช็ค : <%=T_Change &" "& UCase(T_Period) %><br> </a>
                                                 </div>
