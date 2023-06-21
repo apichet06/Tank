@@ -1,3 +1,7 @@
+// Force a reload of the current page
+
+
+
 $(".insert_data").click(function (e) {
     e.preventDefault();
     var T_ID = $(this).data("t_id");
@@ -28,5 +32,5 @@ $("#cleanup").click(function (e) {
 });
 
 $(document).ready(function () {
-    $('#example').DataTable();
+    $('.example').DataTable();
 });

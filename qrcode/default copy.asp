@@ -43,19 +43,19 @@ If username ="" Then
                   <h3>Qrcode</h3> 
             </div>
             <hr/>
-                        <div class="col-md-9"> 
+                        <div class="col-md-12"> 
                             <hr />
                             <div class="card"> 
                                 <div class="card-body">
                                 <h4> คลิกเลือกรายการที่ต้องการ Print</h4> <hr/>
-                                      <table class="table table-sm table-striped table-hover table-bordered example">
+                                      <table class="table table-sm table-striped table-hover table-bordered" id="example">
                                          <thead>
                                            <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">เลือก</th> 
+                                            <th scope="col">ต้องการ Print QrCode</th> 
                                             <th scope="col">Machine</th>
                                             <th scope="col">จุดที่เปลี่ยน</th>
-                                            <th scope="col">ความถี่ในการเปลี่ยน</th> 
+                                            <th scope="col">รอบเช็ค</th> 
                                            </tr>
                                         </thead>
                                         <tbody>
@@ -73,7 +73,7 @@ If username ="" Then
                                                         T_ID = rs("T_ID")
                                                         T_Change = rs("T_Change")
                                                         T_Period = rs("T_Period")
-                                                %>
+                                                    %> 
                                             <tr>
                                             <th scope="row"><%=i %></th>
                                             <td><a href="#" class="insert_data" data-t_id="<%=T_ID%>">เลือก</a></td>
@@ -85,23 +85,56 @@ If username ="" Then
                                         i = i + 1
                                         rs.MoveNext
                                     Wend
-                                    %> 
+                                    %>      
                                         </tbody>
                                       </table>
-                                     
+                                    
+                                    <div class="row">
+
+                                    <% i=1
+                                  sql = " SELECT MAX(a.M_Name) AS M_Name, MAX(c.T_Name) AS T_Name, MAX(c.T_Change) AS T_Change, MAX(c.T_Period) AS T_Period, MAX(T_QTY) AS T_QTY, c.T_ID" &_
+                                        " FROM [TankDB].[dbo].[Machine] a" &_ 
+                                        " INNER JOIN [TankDB].[dbo].[Tank] c ON a.M_ID = c.M_ID" &_ 
+                                        " LEFT JOIN [TankDB].[dbo].[QrCode] d ON c.T_ID = d.T_ID" &_
+                                        " WHERE c.T_Status = 1 AND   a.M_Status = 1 AND c.T_ID NOT IN (SELECT T_ID FROM [TankDB].[dbo].[QrCode])" &_ 
+                                        " GROUP BY c.T_ID" 
+                                    Set rs = db.Execute(sql)
+                                    While Not rs.EOF
+                                        M_Name = rs("M_Name")
+                                        T_Name = rs("T_Name")
+                                        T_ID = rs("T_ID")
+                                        T_Change = rs("T_Change")
+                                        T_Period = rs("T_Period")
+                                    %> 
+                                        <div class="col-md-2"> 
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <a href="#" class="insert_data" data-t_id="<%=T_ID%>">
+                                                    <%="#"& i &" "& M_Name %><br> 
+                                                    จุดที่เปลี่ยน : <%=T_Name %><br>
+                                                    รอบเช็ค : <%=T_Change &" "& UCase(T_Period) %><br> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <%
+                                        i = i + 1
+                                        rs.MoveNext
+                                    Wend
+                                    %>      
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9"> 
+                        <div class="col-md-12"> 
                             <hr />
                             <div class="card"> 
                                 <div class="card-body">
                                 <h4> รายการที่จะ Print</h4> <hr/>
-                                 <table class="table table-sm table-striped table-hover table-bordered example">
+                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Machine</th>
+                                                        <th>เครื่องจักร</th>
                                                         <th>จุดที่เปลี่ยน</th>
                                                         <th>Code CS</th> 
                                                     </tr>
@@ -120,19 +153,21 @@ If username ="" Then
                                                             While Not rs.EOF
                                                             M_Name   = rs("M_Name")
                                                             T_Name = rs("T_Name")
-                                                            CS_CODE   = rs("CS_CODE")     
-                                                   %>  
+                                                            CS_CODE   = rs("CS_CODE")
+                                                           
+                                                             
+                                                %>  
                                                     <tr>
                                                         <td><%=i%></td>
                                                         <td><%=M_Name%></td>
                                                          <td><%=T_Name%></td>
                                                         <td><%=CS_CODE %></td> 
                                                     </tr> 
-                                                  <%
+                                                      <%
                                                             i = i + 1
                                                             rs.MoveNext
                                                     Wend
-                                                  %> 
+                                                %> 
                                                 </tbody> 
                                             </table>
                                             <div class="text-right">
@@ -158,9 +193,3 @@ If username ="" Then
       <script src="../js/dataTables.bootstrap4.min.js"></script> 
       <script src="../js/all.min.js"></script>
       <script src="./script.js"></script>
-
-      <script>
-        $(document).ready(function () {
-             $('.example').DataTable();
-        });
-      </script>

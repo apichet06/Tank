@@ -123,10 +123,10 @@ If username ="" Then
                             </div>
                         </div> 
 
-                                <div class="col-md-12 p-3"><hr/>
+                                <div class="col-md-10 p-3"><hr/>
                                     <div class="card">
                                         <div class="card-body">
-                                        <table id="example" class="table table-striped table-bordered table-sm " style="width:100%">
+                                          <table class="table table-sm table-striped table-hover table-bordered" id="example">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -160,7 +160,7 @@ If username ="" Then
                                                     <!-- <td><% IF rs("M_Building") =1 Then Response.Write("B-1") Else Response.Write("B-2") End IF %></td>  -->
                                                     <!-- <td><%=rs("T_Name")%></td> -->
                                                     <td><%=rs("CS_Code")%></td>
-                                                    <td class="text-center"><%=rs("T_QTY")%></td>
+                                                    <td class="text-center"><%=rs("T_QTY")%> EA</td>
                                                     <td><%=rs("T_Change") & " " &  UCase(rs("T_Period"))%></td> 
                                                     <td class="text-center">
                                                         <a href="#" class="btn btn-danger btn-sm del" data-id= "<%=rs("T_ID")%>"> <i class="fa-solid fa-trash"></i></a> 

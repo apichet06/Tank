@@ -43,12 +43,12 @@ If username ="" Then
                   <h3>ประวัติการเปลี่ยน CS Part</h3> 
             </div>
             <hr/>
-                        <div class="col-md-12"> 
+                        <div class="col-md-10"> 
                             <hr />
                             <div class="card"> 
                                 <div class="card-body">
                                
-                                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                          <table class="table table-sm table-striped table-hover table-bordered" id="example">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
