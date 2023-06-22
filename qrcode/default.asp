@@ -97,7 +97,7 @@ If username ="" Then
                             <div class="card"> 
                                 <div class="card-body">
                                 <h4> รายการที่จะ Print</h4> <hr/>
-                                 <table class="table table-sm table-striped table-hover table-bordered example">
+                                 <table class="table table-sm table-striped table-hover table-bordered example1">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -158,9 +158,31 @@ If username ="" Then
       <script src="../js/dataTables.bootstrap4.min.js"></script> 
       <script src="../js/all.min.js"></script>
       <script src="./script.js"></script>
-
       <script>
         $(document).ready(function () {
-             $('.example').DataTable();
-        });
+             $('.example1').DataTable();
+  // เช็คว่ามีค่าการค้นหาที่ถูกเก็บไว้ใน localStorage หรือไม่
+  var searchValue = localStorage.getItem('datatableSearch');
+
+  // ตั้งค่าค่าการค้นหาใน DataTables
+  var dataTable = $('.example').DataTable();
+  if (searchValue) {
+    dataTable.search(searchValue).draw();
+  }
+
+  // เมื่อมีการค้นหาใน DataTables ให้เก็บค่าการค้นหาลงใน localStorage
+  $('.example').on('search.dt', function () {
+    var currentSearch = dataTable.search();
+    localStorage.setItem('datatableSearch', currentSearch);
+  });
+
+  // การเรียกใช้ฟังก์ชัน reload ของ Bootstrap
+  $('.reload-button').click(function () {
+    // ลบค่าการค้นหาออกจาก localStorage
+    localStorage.removeItem('datatableSearch');
+
+    // เรียกใช้งานฟังก์ชัน reload ของ Bootstrap ที่ต้องการ
+    // ตัวอย่าง: location.reload();
+  });
+});
       </script>

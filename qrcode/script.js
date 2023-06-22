@@ -31,6 +31,6 @@ $("#cleanup").click(function (e) {
     });
 });
 
-$(document).ready(function () {
-    $('.example').DataTable();
-});
+// $(document).ready(function () {
+//     $('.example').DataTable();
+// });
