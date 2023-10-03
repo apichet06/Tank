@@ -221,11 +221,11 @@ function formatDateNextTime(dateString, T_Change, T_Period, format) {
             break;
         case "weeks":
             dateObject.setDate(dateObject.getDate() + (chang * 7)); // Add 1 week 
+            break;
         default:
             dateObject.setFullYear(dateObject.getFullYear() + chang);
             break;
     }
-
 
     var formattedDate = format
         .replace("DD", padZero(dateObject.getDate()))
@@ -250,7 +250,7 @@ $("#T_ID").change(function (e) {
         data: { T_ID: T_ID, Data: "Data" },
         dataType: "json",
         success: function (data) {
-            // console.log(data.TK_Date);
+            console.log(data.T_Period);
             const tkDate = data.TK_Date === "" ? "N/A" : formatDate(data.TK_Date, "DD-MM-YYYY HH:mm");
             const tkDateNexTime = data.TK_Date === "" ? "N/A" : formatDateNextTime(data.TK_Date, data.T_Change, data.T_Period, "DD-MM-YYYY HH:mm");
             $("#Data").html(

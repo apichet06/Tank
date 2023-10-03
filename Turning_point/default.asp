@@ -93,7 +93,7 @@ If username ="" Then
                                                 <label class="form-label">ความถี่ในการเปลี่ยน</label>
                                                 <select class="form-control select2" id="T_Change" name="T_Change" required>
                                                        <option value="">--- ความถี่ ---</option>  
-                                                        <%   For i = 1 To 99 %> 
+                                                        <%   For i = 1 To 1000 %> 
                                                          <option value="<%=i%>"><%=i%></option>  
                                                         <%  Next %>
                                                 </select>         

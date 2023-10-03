@@ -14,7 +14,6 @@ T_Period = Request.Form("T_Period")
 insert = Request.Form("insert")  
 
  
-
 if insert = "insert" Then 
 
         sql = "SELECT COUNT(*) AS DuplicateCount FROM [TankDB].[dbo].[Tank] WHERE  T_Name = '"& T_Name &"' and M_ID='"& M_ID &"' and T_Status = '1' "
@@ -42,6 +41,7 @@ if insert = "insert" Then
                 
                                 Response.Write (Err.Description)    
                                 response.write("0")
+        
                                 show = "0" 
                                 
                                 Else
@@ -53,7 +53,7 @@ if insert = "insert" Then
         End If
 
         Json =""
-        Json = Json & "{" 
+        Json = Json & "{"
         Json = Json & """data"": "& show &"  "& vbcrlf  
         Json = Json & "}"
         
