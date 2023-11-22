@@ -16,9 +16,7 @@ For i = 1 To Form_Number
 
    on error resume next
   db.Execute(sql_)
-
  
-    
 Next
 
         Dim show

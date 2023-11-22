@@ -61,8 +61,12 @@ If username ="" Then
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+
+
+
+
                                                     <% i=1
-                                                sql =   " SELECT MAX(a.M_Name) as M_Name, MAX(b.T_Name) as T_Name, MAX(b.T_Change) as T_Change, MAX(b.T_Period) as T_Period, MAX(T_QTY) as T_QTY,MAX(CONVERT(varchar(19), d.TK_Date, 120)) as TK_Date, MAX(CS_Code) as CS_Code " &_
+                                                sql =   " SELECT top 1500 MAX(a.M_Name) as M_Name, MAX(b.T_Name) as T_Name, MAX(b.T_Change) as T_Change, MAX(b.T_Period) as T_Period, MAX(T_QTY) as T_QTY,MAX(CONVERT(varchar(19), d.TK_Date, 120)) as TK_Date, MAX(CS_Code) as CS_Code " &_
                                                         " FROM [TankDB].[dbo].[Machine] a " &_ 
                                                         " INNER JOIN [TankDB].[dbo].[Tank] b ON a.M_ID = b.M_ID " &_
                                                          " INNER JOIN [TankDB].[dbo].[CsCode] c ON b.CS_ID = c.CS_ID " &_
@@ -87,7 +91,7 @@ If username ="" Then
                                                          <td><%=T_Name%></td>
                                                         <td><%=CS_Code  %></td>
                                                         <td> <%=T_Change &" "& UCase(T_Period) %></td>
-                                                        <td><% IF TK_Date = "" Then response.write("N/A") Else response.write DateNow(rs("TK_Date")) End IF %></td>
+                                                        <td><% IF TK_Date = "" Then response.write("N/A") Else response.write  DateNow(rs("TK_Date")) End IF %></td>
                                                        
                                                     </tr> 
                                                       <%

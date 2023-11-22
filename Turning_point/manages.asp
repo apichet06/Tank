@@ -14,6 +14,12 @@ T_Period = Request.Form("T_Period")
 insert = Request.Form("insert")  
 
  
+
+
+
+
+
+
 if insert = "insert" Then 
 
         sql = "SELECT COUNT(*) AS DuplicateCount FROM [TankDB].[dbo].[Tank] WHERE  T_Name = '"& T_Name &"' and M_ID='"& M_ID &"' and T_Status = '1' "
@@ -61,6 +67,49 @@ if insert = "insert" Then
 
         End If
 End If
+
+
+
+
+
+
+T_ID = Request.Form("T_ID")
+Update = Request.Form("update")
+  
+
+if Update = "update" then 
+ 
+ sql = "UPDATE  [TankDB].[dbo].[Tank] Set M_ID = '"&M_ID&"',T_Name= '"&T_Name&"',CS_ID='"&CS_ID&"',T_QTY='"&T_QTY&"',T_Change='"&T_Change&"',T_Period='"&T_Period&"' Where T_ID = '"&T_ID&"' "
+          on error resume next
+
+                        db.Execute(sql)
+     
+                        if err<>0 Then
+                
+                                Response.Write (Err.Description)    
+                                response.write("0")
+        
+                                show = "0" 
+                                
+                                Else
+                                
+                                show = "1" 
+
+                        End if
+ 
+        
+
+        Json =""
+        Json = Json & "{"
+        Json = Json & """data"": "& show &"  "& vbcrlf  
+        Json = Json & "}"
+        
+        Response.Write Json  
+
+  End If
+ 
+ 
+
 
 DEL = Request.Form("DEL")
 T_ID = Request.Form("T_ID")

@@ -72,18 +72,23 @@ If username ="" Then
                                     i = 1 
                                     sql = "SELECT * FROM [TankDB].[dbo].[Machine] Where M_Status = 1"
                                       SET rs = db.Execute(sql)
-                                     While Not rs.EOF
-                                    
+                                     While Not rs.EOF 
                                     %>
                                     <tr>
                                         <td><%=i%></td>
                                         <td><%=rs("M_Name")%></td>
                                         <!-- <td class="text-center"><%=rs("M_Building")%></td> -->
                                         <td class="text-center">
+                                            <a href="#"class="btn btn-warning btn-sm edit" data-toggle="modal" data-target="#exampleModalCenter"
+                                              data-id= "<%=rs("M_ID")%>" 
+                                              data-m_name= "<%=rs("M_Name")%>"
+                                              >
+                                             <i class="fa-solid fa-pen"></i>
+                                            </a> 
                                             <a href="#" class="btn btn-danger btn-sm del" data-id= "<%=rs("M_ID")%>"> <i class="fa-solid fa-trash"></i></a> 
                                         </td> 
                                     </tr> 
-                                    <% 
+                                    <%
                                     i = i + 1
                                       rs.MoveNext
                                     Wend
@@ -99,7 +104,7 @@ If username ="" Then
             </body>
         </html>
  
-
+ <!--#include file="./modals.asp"-->  
       <script src="../js/jquery.min.js"></script>
       <script src="../js/bootstrap.bundle.min.js"></script>      
       <script src="../js/select2.full.js"></script>
@@ -110,3 +115,4 @@ If username ="" Then
       <script src="../js/dataTables.bootstrap4.min.js"></script> 
       <script src="../js/all.min.js"></script> 
       <script src="./script.js"></script>
+ 

@@ -55,6 +55,62 @@ $("#insert_data").submit(function (e) {
 
 });
 
+$(".edit").click(function (e) {
+    e.preventDefault();
+
+    var id = $(this).data("id");
+    var m_name = $(this).data("m_name");
+    $("#EM_ID").val(id)
+    $("#EM_Name").val(m_name)
+
+});
+
+$("#update_data").submit(function (e) {
+    e.preventDefault();
+
+    var M_ID = $("#EM_ID").val();
+    var M_Name = $("#EM_Name").val();
+    $.ajax({
+        type: "post",
+        url: "./manages.asp",
+        data: { M_ID, M_Name, update: "update" },
+        dataType: "json",
+        success: function (response) {
+            if (response.data == "1") {
+                Swal.fire({
+                    title: 'บันทึกข้อมูลสำเร็จ',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                })
+
+            } else {
+                Swal.fire({
+                    title: 'ข้อมูลซ้ำ',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง'
+                })
+
+            }
+
+        }
+    });
+
+});
+
+
+
+
+
+
+
 $(".del").click(function (e) {
     e.preventDefault();
     var id = $(this).data("id")

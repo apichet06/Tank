@@ -29,8 +29,7 @@ If username ="" Then
         <!-- <link rel="stylesheet" href="../font/stylesheet.css">  -->
     </head>
     <body>
-     <!--#include file="../memu/menu.asp"-->  
-
+     <!--#include file="../memu/menu.asp"-->   
       <div class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
@@ -163,7 +162,16 @@ If username ="" Then
                                                     <td class="text-center"><%=rs("T_QTY")%> EA</td>
                                                     <td><%=rs("T_Change") & " " &  UCase(rs("T_Period"))%></td> 
                                                     <td class="text-center">
-                                                        <a href="#" class="btn btn-danger btn-sm del" data-id= "<%=rs("T_ID")%>"> <i class="fa-solid fa-trash"></i></a> 
+                                                        <a href="#" class="btn btn-warning btn-sm edit" data-toggle="modal" data-target="#staticBackdrop"
+                                                        data-id="<%=rs("T_ID")%>"
+                                                        data-m_id="<%=rs("M_ID")%>"
+                                                        data-t_name="<%=rs("T_Name")%>"
+                                                        data-cs_id="<%=rs("CS_ID")%>"
+                                                        data-t_qty="<%=rs("T_QTY")%>"
+                                                        data-t_change="<%=rs("T_Change")%>"
+                                                        data-t_period="<%=rs("T_Period")%>"
+                                                        ><i class="fa-solid fa-pen"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-sm del" data-id= "<%=rs("T_ID")%>"> <i class="fa-solid fa-trash"></i></a>  
                                                     </td> 
                                                 </tr> 
                                                 <% 
@@ -181,7 +189,7 @@ If username ="" Then
             </body>
         </html>
  
-
+ <!--#include file="./modals.asp"-->  
       <script src="../js/jquery.min.js"></script>
       <script src="../js/bootstrap.bundle.min.js"></script>      
       <script src="../js/select2.full.js"></script>
@@ -192,3 +200,6 @@ If username ="" Then
       <script src="../js/dataTables.bootstrap4.min.js"></script>
       <script src="../js/all.min.js"></script> 
       <script src="./script.js"></script>
+
+
+    

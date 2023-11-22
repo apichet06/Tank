@@ -219,4 +219,40 @@ Function GenerateQRCode(T_ID)
     GenerateQRCode = "<script>" & qrcodeScript & "</script>"
 End Function
 
+
+' นับวันเดือนปี ใกล้กำหนด วันตรวจ
+Function CalculateTimeDifference(targetDate)
+' กำหนดวันที่ที่คุณต้องการ
+targetDate = CDate(targetDate)
+
+' ดึงวันที่และเวลาปัจจุบัน
+currentDateTime = Now
+
+' คำนวณระยะเวลาที่เหลือ
+timeDifference = DateDiff("s", currentDateTime, targetDate)
+
+' แปลงระยะเวลาเป็นวัน, ชั่วโมง, และวินาที
+days = Int(timeDifference / 86400)
+hours = Int((timeDifference Mod 86400) / 3600)
+minutes = Int((timeDifference Mod 3600) / 60)
+seconds = timeDifference Mod 60
+ ' ตรวจสอบเงื่อนไข
+    If days > 0 And hours >= 0 And minutes >= 0 And seconds >= 0 Then
+        dayDiff = days & " วัน " & hours & " ชม. " & minutes & " น. " & seconds & " วิ. "
+    ElseIf days <= 0 And hours > 0 And minutes >= 0 And seconds >= 0 Then
+        dayDiff = hours & " ชม. " & minutes & " น. " & seconds & " วิ. "
+    ElseIf days <= 0 And hours <= 0 And minutes > 0 And seconds >= 0 Then
+        dayDiff = minutes & " น. " & seconds & " วิ. "
+    ElseIf days <= 0 And hours <= 0 And minutes <= 0 And seconds > 0 Then
+        dayDiff = seconds & " วิ. "
+    ElseIf days <= 0 And hours <= 0 And minutes <= 0 And seconds <= 0 Then
+        dayDiff = "<strong class='text-danger'>เลยกำหนด</strong>"
+    End If
+
+CalculateTimeDifference = dayDiff
+  
+End Function
+
+
+
 %>

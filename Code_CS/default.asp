@@ -67,6 +67,12 @@ If username ="" Then
                                         <td><%=i%></td>
                                         <td><%=rs("CS_Code")%></td> 
                                         <td class="text-center">
+                                             <a href="#"class="btn btn-warning btn-sm edit" data-toggle="modal" data-target="#exampleModalCenter"
+                                              data-id= "<%=rs("CS_ID")%>" 
+                                              data-cs_code= "<%=rs("CS_Code")%>"
+                                              >
+                                             <i class="fa-solid fa-pen"></i>
+                                            </a> 
                                             <a href="#" class="btn btn-danger btn-sm del" data-id= "<%=rs("CS_ID")%>"> <i class="fa-solid fa-trash"></i></a> 
                                         </td> 
                                     </tr> 
@@ -80,20 +86,22 @@ If username ="" Then
                         <div>
                             </div>
                             </div>
-
                         </div>
                     <div>
             </body>
         </html>
  
-
+ <!--#include file="./modals.asp"-->  
       <script src="../js/jquery.min.js"></script>
-      <script src="../js/bootstrap.bundle.min.js"></script>      
+      <script src="../js/bootstrap.bundle.min.js"></script> 
       <script src="../js/select2.full.js"></script>
       <script src="../js/sweetalert2@11.js"></script>
-      <script src="../js/moment.min.js"></script>  
-      <script src="../js/tempusdominus-bootstrap-4.min.js"></script>     <script src="../js/jquery.dataTables.min.js"></script>
+      <script src="../js/moment.min.js"></script>
+      <script src="../js/tempusdominus-bootstrap-4.min.js"></script>     
+      <script src="../js/jquery.dataTables.min.js"></script>
       <script src="../js/dataTables.bootstrap4.min.js"></script>
  
       <script src="../js/all.min.js"></script> 
       <script src="./script.js"></script>
+
+  

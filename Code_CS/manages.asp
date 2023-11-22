@@ -11,12 +11,11 @@ insert = Request.Form("insert")
 if insert = "insert" Then 
 
         sql = "SELECT COUNT(*) AS DuplicateCount FROM [TankDB].[dbo].[CsCode] WHERE CS_Code = '" & CS_Code & "' and CS_Status = '1' "
-
-        Dim rs
+ 
         Set rs = db.Execute(sql)
 
         If Not rs.EOF Then
-        Dim duplicateCount
+       
         duplicateCount = rs("DuplicateCount")
         
         If duplicateCount > 0 Then
@@ -100,6 +99,57 @@ IF DEL = "delete" Then
                 Response.Write Json 
         End if
 End IF
+
+
+update = Request.Form("update")  
+
+if update = "update" Then 
+
+        sql = "SELECT COUNT(*) AS DuplicateCount FROM [TankDB].[dbo].[CsCode] WHERE CS_Code = '" & CS_Code & "' and CS_Status = '1' and CS_ID <> '"& CS_ID &"' "
+
+        
+        Set rs = db.Execute(sql)
+
+        If Not rs.EOF Then 
+        duplicateCount = rs("DuplicateCount")
+        
+        If duplicateCount > 0 Then
+                show = "11" 
+
+        Else
+          
+                        
+                        sql = "Update [TankDB].[dbo].[CsCode] SET CS_Code = '"& CS_Code &"' Where CS_ID = '"& CS_ID &"'"   
+                        on error resume next
+
+                        db.Execute(sql)
+     
+                        if err<>0 Then
+                
+                                Response.Write (Err.Description)    
+                                response.write("0")
+                                show = "0" 
+                                
+                                Else
+                                
+                                show = "1" 
+
+                        End if
+ 
+        End If
+
+        Json =""
+        Json = Json & "{" 
+        Json = Json & """data"": "& show &"  "& vbcrlf  
+        Json = Json & "}"
+        
+        Response.Write Json 
+
+   
+        End If
+End If
+
+
 %>
 
 

@@ -71,9 +71,12 @@ If username ="" Then
                                         <th scope="col">ความถี่ในการเปลี่ยน</th> 
                                         <th scope="col">วันที่เปลี่ยน ล่าสุด</th>
                                         <th scope="col">เปลี่ยนครั้งถัดไป</th>
+                                        <th scope="col">ครั้งถัดไปคงเหลือ</th>
                                         </tr>
                                     </thead>
                                     <tbody >
+
+ 
                                                     <%   
                                                             FromValue = Request.Form("from")
                                                             TOValue = Request.Form("to")
@@ -86,7 +89,7 @@ If username ="" Then
                                                                 FromDate = ""
                                                              end if 
 
-                                                        sql =   " SELECT  MAX(a.M_Name) as M_Name,MAX(b.T_Name) as T_Name,MAX(b.T_Change) as T_Change,MAX(b.T_Period) as T_Period,MAX(T_QTY) as T_QTY,MAX(CONVERT(varchar(19), d.TK_Date, 120)) as TK_Date,MAX(CS_Code)as CS_Code  " &_
+                                                        sql =   " SELECT MAX(a.M_Name) as M_Name,MAX(b.T_Name) as T_Name,MAX(b.T_Change) as T_Change,MAX(b.T_Period) as T_Period,MAX(T_QTY) as T_QTY,MAX(CONVERT(varchar(19), d.TK_Date, 120)) as TK_Date,MAX(CS_Code)as CS_Code  " &_
                                                                 " FROM [TankDB].[dbo].[Machine] a " &_ 
                                                                 " INNER JOIN [TankDB].[dbo].[Tank] b ON b.M_ID = a.M_ID " &_
                                                                 " LEFT JOIN [TankDB].[dbo].[CsCode] c ON c.CS_ID = b.CS_ID " &_
@@ -114,7 +117,9 @@ If username ="" Then
                                                                 <td><%=T_Change &" "& UCase(T_Period) %></td>
                                                                 <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write DateNow(rs("TK_Date")) End IF %></td>
                                                                 <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write DataDate(TK_Date, T_Change, T_Period) End IF %></td>
-                                                                </tr> 
+                                                               <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write  CalculateTimeDifference(DataDate(TK_Date, T_Change, T_Period)) End IF%>  </td>
+                                                               
+                                                               </tr> 
                                                                 <%
                                                                     i = i + 1
                                                                     rs.MoveNext
@@ -129,7 +134,25 @@ If username ="" Then
          </div>
     </body>
 </html>
-  
+
+ 
+<%
+
+%>
+ 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>คำนวณระยะเวลา</title>
+</head>
+<body>
+    
+ 
+</body>
+</html>
+
+ 
       <script src="./js/jquery.min.js"></script>
       <script src="./js/bootstrap.bundle.min.js"></script>      
       <script src="./js/select2.full.js"></script>

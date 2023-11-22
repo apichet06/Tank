@@ -56,6 +56,59 @@ $("#insert_data").submit(function (e) {
 
 });
 
+
+$("#update_data").submit(function (e) {
+    e.preventDefault();
+    var CS_ID = $("#ECS_ID").val();
+    var CS_Code = $("#ECS_Code").val();
+    $.ajax({
+        type: "post",
+        url: "./manages.asp",
+        data: { CS_ID, CS_Code: CS_Code, update: "update" },
+
+        dataType: "json",
+        success: function (response) {
+            if (response.data == "1") {
+                $("#exampleModalCenter").hide();
+                Swal.fire({
+                    title: 'แก้ไขข้อมูลสำเร็จ',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                })
+
+            } else {
+                Swal.fire({
+                    title: 'ข้อมูลซ้ำ',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง'
+                })
+
+            }
+
+        }
+    });
+
+});
+
+
+$(".edit").click(function (e) {
+    e.preventDefault();
+
+    var id = $(this).data("id");
+    var CS_Code = $(this).data("cs_code");
+    $("#ECS_ID").val(id)
+    $("#ECS_Code").val(CS_Code)
+
+});
+
 $(".del").click(function (e) {
     e.preventDefault();
     var id = $(this).data("id")
