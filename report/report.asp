@@ -1,10 +1,13 @@
 <%@ Language="VBScript" %>
+<%Response.Buffer = False%>
 <%
 Response.CodePage = 65001
 Response.Charset = "UTF-8"
 Session.CodePage = 65001
 Session.LCID = 1054
 %>
+<% Response.Buffer = true %>
+ 
 <% username=Request.Cookies("LOGON_USER") 'esponse.write (username)
 If username ="" Then
     Response.Write("<script>") 
@@ -21,6 +24,9 @@ If username ="" Then
     <head>
         <title>TANK</title>
         <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
         <meta name="viewport" content="width=device-width,initial-scale=1">  
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/tempusdominus-bootstrap-4.min.css"/>
@@ -66,20 +72,23 @@ If username ="" Then
 
 
                                                     <% i=1
-                                                sql =   " SELECT top 1500 MAX(a.M_Name) as M_Name, MAX(b.T_Name) as T_Name, MAX(b.T_Change) as T_Change, MAX(b.T_Period) as T_Period, MAX(T_QTY) as T_QTY,MAX(CONVERT(varchar(19), d.TK_Date, 120)) as TK_Date, MAX(CS_Code) as CS_Code " &_
-                                                        " FROM [TankDB].[dbo].[Machine] a " &_ 
-                                                        " INNER JOIN [TankDB].[dbo].[Tank] b ON a.M_ID = b.M_ID " &_
-                                                         " INNER JOIN [TankDB].[dbo].[CsCode] c ON b.CS_ID = c.CS_ID " &_
-                                                        " INNER JOIN [TankDB].[dbo].[Tank_Dates] d ON b.T_ID = d.T_ID " &_
-                                                        " WHERE b.T_Status = 1 " &_ 
-                                                        " GROUP BY d.TK_Id  " &_
-                                                        " ORDER BY MAX(d.TK_Id) DESC " 
+                                                'sql =   " SELECT  MAX(a.M_Name) as M_Name, MAX(b.T_Name) as T_Name, MAX(b.T_Change) as T_Change, MAX(b.T_Period) as T_Period, MAX(T_QTY) as T_QTY,MAX(CONVERT(varchar(19), d.TK_Date, 120)) as TK_Date, MAX(CS_Code) as CS_Code_ " &_
+                                                        '" FROM [TankDB].[dbo].[Machine] a " &_ 
+                                                        '" INNER JOIN [TankDB].[dbo].[Tank] b ON a.M_ID = b.M_ID " &_
+                                                        '" INNER JOIN [TankDB].[dbo].[CsCode] c ON b.CS_ID = c.CS_ID " &_
+                                                        '" INNER JOIN [TankDB].[dbo].[Tank_Dates] d ON b.T_ID = d.T_ID " &_
+                                                        '" WHERE b.T_Status = 1 " &_ 
+                                                        '" GROUP BY d.TK_Id  " &_
+                                                        '" ORDER BY MAX(d.TK_Id) DESC " 
                                                         ' on error resume next
-                                                        SET rs = db.Execute(sql)
+
+                                                        
+                                                          sql = "EXEC [TankDB].[dbo].[st_HistoryTank]  "
+                                                        SET rs = db.execute(sql)
                                                             While Not rs.EOF
-                                                            M_Name   = rs("M_Name") 
+                                                            M_Name   = rs("M_Name")
                                                             T_Name   = rs("T_Name")
-                                                            CS_Code  = rs("CS_Code")
+                                                            CS_Code  = rs("CS_Code_")
                                                             T_QTY    = rs("T_QTY")
                                                             T_Change = rs("T_Change")
                                                             T_Period = rs("T_Period")
@@ -89,7 +98,7 @@ If username ="" Then
                                                         <td><%=i%></td>
                                                         <td><%=M_Name%></td>
                                                          <td><%=T_Name%></td>
-                                                        <td><%=CS_Code  %></td>
+                                                        <td><%=CS_Code%></td>
                                                         <td> <%=T_Change &" "& UCase(T_Period) %></td>
                                                         <td><% IF TK_Date = "" Then response.write("N/A") Else response.write  DateNow(rs("TK_Date")) End IF %></td>
                                                        
@@ -97,6 +106,7 @@ If username ="" Then
                                                       <%
                                                             i = i + 1
                                                             rs.MoveNext
+                                                            Response.Flush
                                                     Wend
                                                 %> 
                                                 </tbody> 

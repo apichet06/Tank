@@ -12,6 +12,9 @@ If username ="" Then
     <head>
         <title>TANK</title>
         <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/bootstrap.min.css">     
         <link rel="stylesheet" href="../css/tempusdominus-bootstrap-4.min.css"/>
@@ -44,6 +47,22 @@ If username ="" Then
                                                         <option value="2">ตึก 2</option>  
                                                 </select>
                                             </div>  -->
+                                            <div class="mb-3">
+                                              <label class="form-label">Equipment</label>
+                                             <select class="form-control select" id="MC_EquipmentNo" name="MC_EquipmentNo" required>
+                                                <option value="">--- เลื่อก Equipment ---</option> 
+                                                     
+                                                  <%
+                                                    sql = "SELECT  MC_EquipmentNo  FROM [PPOnlineBPD].[dbo].[L_Machine] Where MC_RecordStatus = 'Y' and MC_Plant ='3000' "
+                                                    SET rs = db95.Execute(sql)
+                                                    While Not rs.EOF 
+                                                     %>
+                                                        <option value="<%=rs("MC_EquipmentNo")%>"><%=rs("MC_EquipmentNo")%></option> 
+                                                    <% 
+                                                      rs.MoveNext
+                                                    Wend %>
+                                                </select>
+                                            </div> 
                                             <div class="modal-footer">
                                             <button type="submit" class="btn btn-success">บันทึก</button>
                                             </div>
@@ -54,20 +73,18 @@ If username ="" Then
 
                         <div class="col-md-8"><hr/>
                         <div class="card">
-                            <div class="card-body">
-                                
-                            
+                            <div class="card-body"> 
                             <table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>ชื่อเครื่องจักร</th>
+                                        <th class="text-center">Equipment</th>
                                         <!-- <th class="text-center">ตึก/โรง</th> -->
                                         <th class="text-center">จัดการ</th> 
                                     </tr>
                                 </thead>
-                                <tbody>
-
+                                <tbody> 
                                     <%
                                     i = 1 
                                     sql = "SELECT * FROM [TankDB].[dbo].[Machine] Where M_Status = 1"
@@ -77,12 +94,13 @@ If username ="" Then
                                     <tr>
                                         <td><%=i%></td>
                                         <td><%=rs("M_Name")%></td>
+                                        <td class="text-center"><%=rs("MC_EquipmentNo")%></td>
                                         <!-- <td class="text-center"><%=rs("M_Building")%></td> -->
                                         <td class="text-center">
-                                            <a href="#"class="btn btn-warning btn-sm edit" data-toggle="modal" data-target="#exampleModalCenter"
+                                            <a href="#"class="btn btn-warning btn-sm edit" data-toggle="modal" data-target="#Editmodals"
                                               data-id= "<%=rs("M_ID")%>" 
                                               data-m_name= "<%=rs("M_Name")%>"
-                                              >
+                                              data-eq1_equipment="<%=rs("MC_EquipmentNo")%>">
                                              <i class="fa-solid fa-pen"></i>
                                             </a> 
                                             <a href="#" class="btn btn-danger btn-sm del" data-id= "<%=rs("M_ID")%>"> <i class="fa-solid fa-trash"></i></a> 
@@ -114,5 +132,7 @@ If username ="" Then
       <script src="../js/jquery.dataTables.min.js"></script>
       <script src="../js/dataTables.bootstrap4.min.js"></script> 
       <script src="../js/all.min.js"></script> 
-      <script src="./script.js"></script>
- 
+      <script src="./script.js?n=1"></script>
+ <script>
+    $(".select").select2();
+ </script>

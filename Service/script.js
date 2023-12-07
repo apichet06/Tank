@@ -8,6 +8,9 @@ window.addEventListener("error", function (e) {
 $(function () {
     $('#TK_Date').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
+        // minDate: moment().startOf('day'),
+        maxDate: moment().endOf('day'),
+        useCurrent: false
     });
 });
 

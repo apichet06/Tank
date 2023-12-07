@@ -1,5 +1,4 @@
-<!--#include file = "../backend/connection/db.asp"-->
-  
+<!--#include file = "../backend/connection/db.asp"--> 
 <%
 username = Request.Cookies("LOGON_USER") 
   
@@ -7,7 +6,7 @@ M_ID = Request.Form("M_ID")
 M_Name = Request.Form("M_Name")
 M_Building = Request.Form("M_Building")
 insert = Request.Form("insert")  
-
+MC_EquipmentNo = Request.Form("MC_EquipmentNo")
 
 if insert = "insert" Then 
 
@@ -27,7 +26,7 @@ if insert = "insert" Then
         
 
  
-                        sql = "INSERT INTO [TankDB].[dbo].[Machine](M_Name,M_Building,Username,M_Status)VALUES('"&M_Name&"','"&M_Building&"','"&username&"','1')"
+                        sql = "INSERT INTO [TankDB].[dbo].[Machine](M_Name,M_Building,MC_EquipmentNo,Username,M_Status)VALUES('"&M_Name&"','"&M_Building&"','"&MC_EquipmentNo&"','"&username&"','1')"
 
                         on error resume next
 
@@ -76,19 +75,19 @@ if update = "update" Then
 
         Else 
                          
-                        sql = "UPDATE [TankDB].[dbo].[Machine] SET M_Name ='"& M_Name &"' Where M_ID = '"& M_ID &"'"
+                        sql = "UPDATE [TankDB].[dbo].[Machine] SET M_Name ='"& M_Name &"' , MC_EquipmentNo ='"&MC_EquipmentNo&"' Where M_ID = '"& M_ID &"'"
                         on error resume next
 
                         db.Execute(sql)
      
                         if err<>0 Then
-                
+
                                 Response.Write (Err.Description)    
                                 response.write("0")
                                 show = "0" 
                                 
-                                Else
-                                
+                         Else
+
                                 show = "1" 
 
                         End if
@@ -102,7 +101,7 @@ if update = "update" Then
         
         Response.Write Json 
 
-   
+
         End If
 End If
 

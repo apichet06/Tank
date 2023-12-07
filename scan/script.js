@@ -2,6 +2,7 @@
 $(function () {
     $('#TK_Date').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
+        maxDate: moment().endOf('day'),
         // format: 'L'
     });
 });

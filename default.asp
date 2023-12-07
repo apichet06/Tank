@@ -16,6 +16,9 @@ If username ="" Then
     <head>
         <title>TANK</title>
         <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
         <meta name="viewport" content="width=device-width,initial-scale=1">  
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <link rel="stylesheet" href="./css/tempusdominus-bootstrap-4.min.css"/>
@@ -117,8 +120,7 @@ If username ="" Then
                                                                 <td><%=T_Change &" "& UCase(T_Period) %></td>
                                                                 <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write DateNow(rs("TK_Date")) End IF %></td>
                                                                 <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write DataDate(TK_Date, T_Change, T_Period) End IF %></td>
-                                                               <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write  CalculateTimeDifference(DataDate(TK_Date, T_Change, T_Period)) End IF%>  </td>
-                                                               
+                                                               <td><% IF IsNull(TK_Date)  Then response.write("N/A") Else response.write  CalculateTimeDifference(DataDate(TK_Date, T_Change, T_Period)) End IF%>  </td> 
                                                                </tr> 
                                                                 <%
                                                                     i = i + 1

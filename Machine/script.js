@@ -20,10 +20,11 @@ $("#insert_data").submit(function (e) {
     var formData = new FormData(this);
     var M_Name = $("#M_Name").val();
     var M_Building = $("#M_Building").val();
+    var MC_EquipmentNo = $("#MC_EquipmentNo").val();
     $.ajax({
         type: "post",
         url: "./manages.asp",
-        data: { M_Name: M_Name, M_Building: M_Building, insert: "insert" },
+        data: { M_Name, M_Building, MC_EquipmentNo, insert: "insert" },
         dataType: "json",
         success: function (response) {
             if (response.data == "1") {
@@ -57,11 +58,13 @@ $("#insert_data").submit(function (e) {
 
 $(".edit").click(function (e) {
     e.preventDefault();
-
     var id = $(this).data("id");
     var m_name = $(this).data("m_name");
+    var eq1_equipment = $(this).data("eq1_equipment")
+
     $("#EM_ID").val(id)
     $("#EM_Name").val(m_name)
+    $("#EMC_EquipmentNo").val(eq1_equipment).select2()
 
 });
 
@@ -70,13 +73,15 @@ $("#update_data").submit(function (e) {
 
     var M_ID = $("#EM_ID").val();
     var M_Name = $("#EM_Name").val();
+    var MC_EquipmentNo = $("#EMC_EquipmentNo").val();
     $.ajax({
         type: "post",
         url: "./manages.asp",
-        data: { M_ID, M_Name, update: "update" },
+        data: { M_ID, M_Name, MC_EquipmentNo, update: "update" },
         dataType: "json",
         success: function (response) {
             if (response.data == "1") {
+                $("#Editmodals").hide();
                 Swal.fire({
                     title: 'บันทึกข้อมูลสำเร็จ',
                     icon: 'success',
